@@ -1,4 +1,4 @@
-// Useful code from previous projects to parse JSPN data from API
+// Useful code from previous projects to parse JSON data from API
 
 <script>
         function loadDoc() {
