@@ -1,0 +1,358 @@
+<!--
+jQuery Practice Note
+
+
+DOM = Document Object Model
+
+The DOM defines a standard for accessing HTML and XML documents:
+
+"The W3C Document Object Model (DOM) is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document."
+
+
+-->
+
+
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+-->
+<script type="text/javascript">
+
+// selectors
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").hide(); //tag
+        //$("#test") id
+        //$(".class") class
+        //$("*") all 
+        //$("this") for the current
+    });
+});
+
+// Events--https://www.w3schools.com/jquery/jquery_ref_events.asp
+$(document).ready(function(){
+    $("p").click(function(){ //dblclick(), mouseenter(), mouseleave(), mousedown(),mouseup(),
+        $(this).hide();
+    });
+});
+
+//The hover() method takes two functions and is a combination of the mouseenter() and mouseleave() methods.
+$(document).ready(function(){
+    $("#p1").hover(function(){
+        alert("You entered p1!");
+    },
+    function(){
+        alert("Bye! You now leave p1!");
+    }); 
+});
+
+//attaches an event handler function to an HTML form field
+$(document).ready(function(){
+    $("input").focus(function(){
+        $(this).css("background-color", "#cccccc");
+    });
+    $("input").blur(function(){
+        $(this).css("background-color", "#ffffff");
+    });
+});
+
+//on()
+//Attach a click event to a <p> element
+$("p").on("click", function(){
+    $(this).hide();
+});
+$(document).ready(function(){
+    $("p").on({
+        mouseenter: function(){
+            $(this).css("background-color", "lightgray");
+        },  
+        mouseleave: function(){
+            $(this).css("background-color", "lightblue");
+        }, 
+        click: function(){
+            $(this).css("background-color", "yellow");
+        }  
+    });
+});
+
+$("p").keydown();
+$("p").keyup();
+$("p").keypress();
+
+// Effects
+
+$(selector).hide(speed,callback);// "slow", "fast", or milliseconds
+$(selector).show(speed,callback);
+$(selector).toggle(speed,callback);//you can toggle between the hide() and show() methods with the toggle() method.
+$(selector).fadeIn(speed,callback);
+$(selector).fadeOut(speed,callback);
+$(selector).fadeToggle(speed,callback);
+$(selector).fadeTo(speed,opacity,callback); //specifies fading to a given opacity (value between 0 and 1).
+$(selector).slideDown(speed,callback);
+$(selector).slideUp(speed,callback);
+$(selector).slideToggle(speed,callback);
+
+$(selector).animate({params},speed,callback);
+$(document).ready(function(){
+    $("button").click(function(){
+        var div = $("div");
+        div.animate({height: '300px', opacity: '0.4'}, "slow");
+        div.animate({width: '300px', opacity: '0.8'}, "slow");
+        div.animate({height: '100px', opacity: '0.4'}, "slow");
+        div.animate({width: '100px', opacity: '0.8'}, "slow");
+    });
+});
+$(document).ready(function(){
+    $("button").click(function(){
+        var div = $("div");  
+        div.animate({left: '100px'}, "slow");
+        div.animate({fontSize: '3em'}, "slow");
+    });
+});
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        $("div").animate({
+            height: 'toggle'
+        });
+    });
+});
+
+//stop() method is used to stop an animation or effect before it is finished.
+$(selector).stop(stopAll,goToEnd);
+
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideDown(5000);
+    });
+    $("#stop").click(function(){
+        $("#panel").stop();
+    });
+});
+
+
+//A callback function is executed after the current effect is finished.
+$(selector).hide(speed,callback);
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").hide("slow", function(){
+            alert("The paragraph is now hidden");
+        });
+    });
+});
+
+//To chain an action, you simply append the action to the previous action.
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#p1").css("color", "red")
+            .slideUp(2000)
+            .slideDown(2000);
+    });
+});
+
+//Get Content and Attributes
+
+$("#btn1").click(function(){
+    alert("Text: " + $("#test").text());
+});
+$("#btn2").click(function(){
+    alert("HTML: " + $("#test").html());//Sets or returns the content of selected elements (including HTML markup)
+});
+$("#btn1").click(function(){
+    alert("Value: " + $("#test").val());
+});
+$("button").click(function(){
+    alert($("#w3s").attr("href"));
+});
+
+//Set Content and Attributes
+$("#btn1").click(function(){
+    $("#test1").text("Hello world!");
+});
+$("#btn2").click(function(){
+    $("#test2").html("<b>Hello world!</b>");
+});
+$("#btn3").click(function(){
+    $("#test3").val("Dolly Duck");
+});
+
+$("button").click(function(){
+    $("#w3s").attr("href", "https://www.w3schools.com/jquery/");
+});
+
+//Add Elements
+$("p").append("Some appended text.");
+$("p").prepend("Some prepended text.");
+function appendText() {
+    var txt1 = "<p>Text.</p>";               // Create element with HTML  
+    var txt2 = $("<p></p>").text("Text.");   // Create with jQuery
+    var txt3 = document.createElement("p");  // Create with DOM
+    txt3.innerHTML = "Text.";
+    $("body").append(txt1, txt2, txt3);      // Append the new elements 
+}
+$("img").after("Some text after");
+
+$("img").before("Some text before");
+
+function afterText() {
+    var txt1 = "<b>I </b>";                    // Create element with HTML  
+    var txt2 = $("<i></i>").text("love ");     // Create with jQuery
+    var txt3 = document.createElement("b");    // Create with DOM
+    txt3.innerHTML = "jQuery!";
+    $("img").after(txt1, txt2, txt3);          // Insert new elements after <img>
+}
+
+//Remove Elements
+//remove() - Removes the selected element (and its child elements)
+//empty() - Removes the child elements from the selected element
+$("#div1").remove();
+$("#div1").empty();
+$("p").remove(".test, .demo");
+
+//addClass()
+$("button").click(function(){
+    $("h1, h2, p").addClass("blue");
+    $("div").addClass("important");
+});
+$("button").click(function(){
+    $("#div1").addClass("important blue");
+});
+$("button").click(function(){
+    $("h1, h2, p").removeClass("blue");
+});
+$("button").click(function(){
+    $("h1, h2, p").toggleClass("blue");
+});
+$("p").css({"background-color": "yellow", "font-size": "200%"});
+
+
+
+ 
+//This method only traverse a single level up the DOM tree. 
+
+$(document).ready(function(){
+	$("span").parent().css({});
+});
+
+//The parents() method returns all ancestor elements of the selected element, all the way up to the document's root element (<html>).
+$(document).ready(function(){
+    $("span").parents();
+});
+
+// or a specifical ancestor
+$(document).ready(function(){
+    $("span").parents("ul");
+});
+
+//parentsUntil() method returns all ancestor elements between two given arguments.
+$(document).ready(function(){
+    $("span").parentsUntil("div");
+});
+
+//children() method returns all direct children of the selected element
+$(document).ready(function(){
+    $("div").children();
+});
+
+//find() method returns descendant elements of the selected element, all the way down to the last descendant.
+$(document).ready(function(){
+    $("div").find("span");
+    //$("div").find("*"); return all
+});
+//methods for traversing sideways in the DOM tree
+$("selector").siblings()
+$("selector").next()
+$("selector").nextAll()
+$("selector").nextUntil()
+$("selector").prev()
+$("selector").prevAll()
+$("selector").prevUntil()
+
+// Filtering 
+//returns the first element of the specified elements
+$("div").first();
+//returns the last element of the specified elements
+$("div").last();
+//returns an element with a specific index number of the selected elements.
+//The index numbers start at 0, so the first element will have the index number 0 and not 1. The following example selects the second <p> element (index number 1)
+$("p").eq(1);
+//lets you specify a criteria
+//returns all <p> elements with class name "intro"
+$("p").filter(".intro");
+//returns all elements that do not match the criteria
+$("p").not(".intro");
+
+
+//jQurey AJAX
+
+$(selector).load(URL,data,callback);
+//The required URL parameter specifies the URL you wish to load.
+//The optional data parameter specifies a set of querystring key/value pairs to send along with the request.
+//The optional callback parameter is the name of a function to be executed after the load() method is completed.
+$("button").click(function(){
+    $("#div1").load("demo_test.txt", function(responseTxt, statusTxt, xhr){
+        if(statusTxt == "success")
+            alert("External content loaded successfully!");
+        if(statusTxt == "error")
+            alert("Error: " + xhr.status + ": " + xhr.statusText);
+    });
+});
+
+//The $.get() method requests data from the server with an HTTP GET request.
+$.get(URL,callback);
+
+$(document).ready(function(){
+    $("button").click(function(){
+        $.get("demo_test.asp", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+//$.post() method requests data from the server using an HTTP POST request
+$.post(URL,data,callback);
+//The required URL parameter specifies the URL you wish to request.
+//The optional data parameter specifies some data to send along with the request.
+//The optional callback parameter is the name of a function to be executed if the request succeeds.
+$("button").click(function(){
+    $.post("demo_test_post.asp",
+    {
+        name: "Donald Duck",
+        city: "Duckburg"
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+});
+
+//jQuery noConflict()
+// 1. release $, using full name
+$.noConflict();
+jQuery(document).ready(function(){
+    jQuery("button").click(function(){
+        jQuery("p").text("jQuery is still working!");
+    });
+});
+
+// 2. create your own shortcut 
+var jq = $.noConflict();
+jq(document).ready(function(){
+    jq("button").click(function(){
+        jq("p").text("jQuery is still working!");
+    });
+});
+
+
+//Perform a case-insensitive search for text inside a div element:
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myDIV *").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</head>
