@@ -1,3 +1,5 @@
+// Useful code from previous projects to parse JSPN data from API
+
 <script>
         function loadDoc() {
             var xhttp = new XMLHttpRequest();
