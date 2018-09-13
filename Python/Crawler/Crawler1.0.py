@@ -55,7 +55,8 @@ def main():
     queue = [i for i in range(1,2)]
     for i in queue:
         cur_page = i
-        url = 'http://www.meizitu.com/a/legs_{}.html'.format(cur_page)
+        #url = 'http://www.meizitu.com/a/legs_{}.html'.format(cur_page)
+        url = 'http://www.meizitu.com/a/xxx_{}.html'.format(cur_page)
         print('Downloading page {}'.format(cur_page))
         execute(url)
         
