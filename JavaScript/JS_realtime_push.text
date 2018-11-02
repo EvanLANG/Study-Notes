@@ -1,0 +1,70 @@
+//JavaScript or Java real-time push message
+
+// 1. JS
+<script type="text/javascript" src="http(s)://<CDN Host>/goeasy.js"></script>
+<script type="text/javascript">
+var goEasy = new GoEasy({
+appkey: 'Your app key here'
+});
+//GoEasy-OTP can protect your appkey well, more details see:GoEasy-Reference
+</script>
+//Push message by Rest API
+URL:
+
+http(s)://<REST Host>/publish
+
+Method:
+
+Post
+
+Parameters:
+
+Name	Required	Description
+appkey	Yes	Your app key
+channel	Yes	Target channel name
+content	Yes	The message you want to publish
+
+//Push message from web client
+goEasy.publish({
+channel:'demo_channel',
+message:'Hello world!'
+});
+
+//Receive message on web client
+
+goEasy.subscribe({
+channel:'demo_channel',
+onMessage: function(message){
+alert('Meessage received:'+message.content);
+}
+});
+
+
+// 2. Java
+
+Option 1. Manually download
+Download sdk: goeasy.jar
+Add dependency libraries: gson.jar slf4j-api.jar
+Option 2. Maven:
+Add goeasy maven repository to your pom.xml:
+<repositories>
+...
+<repositories>
+<id>goeasy</id>
+<name>goeasy</name>
+<url>http://maven.goeasy.io/content/repositories/releases/</url>
+</repositories>
+</repositories>
+and then add dependency:
+<dependencies>
+...
+<dependencies>
+<groupId>io.goeasy</groupId>
+<artifactId>goeasy-sdk</artifactId>
+<version>0.3.8</version>
+<dependencies>
+<dependencies>
+
+GoEasy goEasy = new GoEasy("http(s)://<REST Host>", "appkey");
+//Push message
+goEasy.publish("demo_channel", "Hello world!");
